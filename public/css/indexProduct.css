@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+.stack img{
+    max-height: 8rem ;
+}
+
+.stack{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #309811;
+    cursor: pointer;
+}
+.pagination .page-link {
+    color: #28a745; /* Green text */
+    border-color: #17752d; /* Green border */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #28a745; /* Green background */
+    border-color: #127629; /* Green border */
+    color: white; /* White text */
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d; /* Gray text for disabled links */
+    border-color: #dee2e6; /* Light gray border for disabled links */
+}
+
+.pagination .page-link:hover {
+    background-color: #28a745; /* Green background on hover */
+    color: white; /* White text on hover */
+    border-color: #28a745; /* Green border on hover */
+}
