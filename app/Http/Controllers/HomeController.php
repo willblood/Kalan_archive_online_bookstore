@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function index()
+    /**
+     * Display the home page.
+     */
+    public function index(): View
     {
-        $viewData=[];
-
-        $books = Book::all();
-        $viewData['title']="Home";
-        $viewData["books"]= $books;
-        return view("welcome")
-        ->with("viewData", $viewData);
+        $viewData = [];
+        $viewData['title'] = 'Home Page - Kalan Archive';
+        $viewData['books_swiper'] = Book::paginate(11);
+        $viewData['featured'] = Book::paginate(9);
+        $viewData['trending'] = Book::orderBy('created_at', 'desc')->take(4)->get();
+        return view('welcome')->with('viewData', $viewData);
     }
 }

@@ -1,83 +1,86 @@
 @extends("layouts.app")
-@section("title",$viewData['title'])
+@section("title", $viewData['title'])
 @section("content")
-    <section  style="background-image: url('https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg');">
-        <div class="container h-100">
-            <div style="background-color: rgb(163, 86, 31) ;" class="row d-flex justify-content-center align-items-center h-100">
-                <div  class="col-lg-12 col-xl-11">
-                    <div class="card text-black" style="border-radius: 25px;">
-                        <div class="card-body p-md-5">
-                            <div  class="row justify-content-center">
-                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+    <section class="signup-section"
+        style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background-color: var(--container-color); padding-top: 5rem; padding-bottom: 2rem;">
+        <div class="signup-container"
+            style="width: 100%; max-width: 400px; background-color: var(--white-color); padding: 2rem; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <h2 class="text-center" style="color: var(--first-color); font-weight: bold; margin-bottom: 1.5rem;">Sign Up
+            </h2>
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Kalan Archive</p>
-
-                                    <form action="/register" method="post" class="mx-1 mx-md-4">
-                                        @csrf
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <input name="name" type="text" id="form3Example1c"
-                                                    class="form-control" />
-                                                <label class="form-label" for="name">Full Name</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <input name="email" type="email" id="form3Example3c"
-                                                    class="form-control" />
-                                                <label class="form-label" for="form3Example3c">Your Email</label>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <input name="password" type="password" id="form3Example4c" class="form-control" />
-                                                <label class="form-label" for="form3Example4c">Password</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <input name="repeatPassword" type="password" id="form3Example4cd" class="form-control" />
-                                                <label class="form-label" for="form3Example4cd">Repeat your
-                                                    password</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-check d-flex justify-content-center mb-5">
-                                            <input class="form-check-input me-2" type="checkbox" value=""
-                                                id="form2Example3c" />
-                                            <label class="form-check-label" for="form2Example3">
-                                                I agree all statements in <a href="#!">Terms of service</a>
-                                            </label>
-                                        </div>
-
-                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-secondary btn-lg">Register</button>
-                                        </div>
-
-                                    </form>
-
-                                </div>
-                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-
-                                    <img src={{ asset('images/world-book-day.png') }}
-                                        class="img-fluid" alt="Sample image">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Display Error Messages -->
+            @if ($errors->any())
+                <div style="color: red; font-size: 0.9rem; margin-bottom: 1rem;">
+                    <ul style="padding-left: 1rem;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-            </div>
+            @endif
+
+            <form action="/register" method="post">
+                @csrf
+                <!-- Full Name -->
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="name" style="color: var(--text-color); font-weight: 600;">Full Name</label>
+                    <input name="name" type="text" id="name" class="form-control"
+                        style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px;"
+                        placeholder="Enter your full name" value="{{ old('name') }}" required>
+                    @error('name')
+                        <div style="color: red; font-size: 0.85rem; margin-top: 0.25rem;">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Email -->
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="email" style="color: var(--text-color); font-weight: 600;">Email</label>
+                    <input name="email" type="email" id="email" class="form-control"
+                        style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px;"
+                        placeholder="Enter your email" value="{{ old('email') }}" required>
+                    @error('email')
+                        <div style="color: red; font-size: 0.85rem; margin-top: 0.25rem;">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Password -->
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="password" style="color: var(--text-color); font-weight: 600;">Password</label>
+                    <input name="password" type="password" id="password" class="form-control"
+                        style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px;"
+                        placeholder="Enter your password" required>
+                    @error('password')
+                        <div style="color: red; font-size: 0.85rem; margin-top: 0.25rem;">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Repeat Password -->
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="repeatPassword" style="color: var(--text-color); font-weight: 600;">Repeat Password</label>
+                    <input name="repeatPassword" type="password" id="repeatPassword" class="form-control"
+                        style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px;"
+                        placeholder="Repeat your password" required>
+                    @error('repeatPassword')
+                        <div style="color: red; font-size: 0.85rem; margin-top: 0.25rem;">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Terms of Service -->
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms" style="color: var(--text-color); font-size: 0.9rem;">I agree to the <a href="#!"
+                            style="color: var(--first-color-alt); text-decoration: underline;">Terms of Service</a></label>
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" class="btn"
+                    style="width: 100%; padding: 0.75rem; background-color: var(--first-color); color: var(--white-color); border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Register</button>
+            </form>
+            <div class="divider" style="margin: 1.5rem 0; text-align: center; color: var(--text-color); font-size: 0.9rem;">
+                OR</div>
+            <!-- Google Signup -->
+            <a href="{{ route('google.login') }}" class="btn-google"
+                style="display: block; width: 100%; padding: 0.75rem; background-color: var(--first-color); color: var(--white-color); border: none; border-radius: 5px; font-weight: bold; text-align: center; text-decoration: none; cursor: pointer;">
+                <i class="ri-google-line" style="margin-right: 0.5rem;"></i> Sign Up with Google
+            </a>
+            <!-- Already have an account -->
+            <p class="text-center" style="margin-top: 1.5rem; color: var(--text-color); font-size: 0.9rem;">Already have an
+                account? <a href="/login" style="color: var(--first-color-alt); text-decoration: underline;">Log In</a></p>
         </div>
     </section>
 @endsection

@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-
+ini_set('memory_limit', '2512M');
 class AppServiceProvider extends ServiceProvider
 {
     /**
