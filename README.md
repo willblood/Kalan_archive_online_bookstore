@@ -54,7 +54,6 @@ Fully optimized for:
 
 ---
 
-## 📷 Screenshots
-> _Add screenshots or UI previews here (login page, bookstore, chatbot, admin dashboard, etc.)_
+
 
 
